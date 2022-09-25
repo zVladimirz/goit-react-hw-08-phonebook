@@ -5,26 +5,16 @@ import * as yup from 'yup';
 
 import { contactsOperations, contactsSelectors } from 'redux/contacts';
 import { useSelector, useDispatch } from 'react-redux';
-import { todosSelectors, changeFilter } from 'redux/contacts';
+import { changeFilter } from 'redux/contacts';
 
 import {
-  withStyles,
-  Card,
-  CardContent,
-  CardActions,
+
   TextField,
-  MenuItem,
-  Button,
-  Box
+  Button
+  
 } from "@mui/material";
 
-import {
-  StyledButton,
-  Input,
-  ErrorText,
-  DivCenter,
-  FormBorder,
-} from './ContactForm.styled';
+
 
 const validationSchema = yup.object({
   name: yup
@@ -49,13 +39,9 @@ const validationSchema = yup.object({
 const Form = () => {
 
   const dispatch = useDispatch();
-  // const [createContacts] = useCreateContactsMutation();
-  // const { data: contacts } = useFetchContactsQuery();
+
   const contacts = useSelector(contactsSelectors.getVisibleContacts);
-  const onDeleteContacts = id =>
-    dispatch(contactsOperations.deleteContacts(id));
-  const onToggleCompleted = id =>
-    dispatch(contactsOperations.toggleCompleted(id));
+
   const onAddContacts = values =>
     dispatch(contactsOperations.addContact(values));
     const addContact = async values => {
