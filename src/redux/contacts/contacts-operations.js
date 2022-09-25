@@ -15,26 +15,17 @@ import {
 } from './contacts-actions';
 
 // GET @ /contacts
-const fetchContacts = () =>  dispatch => {
-
+const fetchContacts = () => dispatch => {
   dispatch(fetchContactsRequest());
 
-axios
-.get('/contacts')
-.then(({ data }) => dispatch(fetchContactsSuccess(data)))
-.catch(error => dispatch(fetchContactsError(error.message)));
-
-
+  axios
+    .get('/contacts')
+    .then(({ data }) => dispatch(fetchContactsSuccess(data)))
+    .catch(error => dispatch(fetchContactsError(error.message)));
 };
 
 // POST @ /contacts
 const addContact = description => dispatch => {
-
-  const contact = {
-    description,
-    completed: false,
-  };
-
   dispatch(addContactRequest());
 
   axios
@@ -53,16 +44,18 @@ const deleteContact = contactsId => dispatch => {
 };
 
 // PATCH @ /contacts/:id
-const toggleCompleted = ({ id, completed }) => dispatch => {
-  const update = { completed };
+const toggleCompleted =
+  ({ id, completed }) =>
+  dispatch => {
+    const update = { completed };
 
-  dispatch(toggleCompletedRequest());
+    dispatch(toggleCompletedRequest());
 
-  axios
-    .patch(`/contacts/${id}`, update)
-    .then(({ data }) => dispatch(toggleCompletedSuccess(data)))
-    .catch(error => dispatch(toggleCompletedError(error.message)));
-};
+    axios
+      .patch(`/contacts/${id}`, update)
+      .then(({ data }) => dispatch(toggleCompletedSuccess(data)))
+      .catch(error => dispatch(toggleCompletedError(error.message)));
+  };
 
 const contactsOperations = {
   fetchContacts,
