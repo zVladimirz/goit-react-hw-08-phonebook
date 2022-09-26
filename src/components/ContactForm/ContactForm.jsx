@@ -44,9 +44,7 @@ const Form = () => {
 
   const onAddContacts = values =>
     dispatch(contactsOperations.addContact(values));
-    const addContact = async values => {
-      contactsOperations.addContact(values);
-    };
+
   const formik = useFormik({
     
     initialValues: {
@@ -57,12 +55,13 @@ const Form = () => {
     validationSchema: validationSchema,
     onSubmit: (value, { resetForm }) => {
         // alert(JSON.stringify(values, null, 2));
-        onAddContacts(value);
+        // onAddContacts(value);
         const indexName = contacts.findIndex(
           contact => contact.name === value.name
         );
         if (indexName === -1) {
-          addContact(value);
+          // addContact(value);
+          onAddContacts(value);
           dispatch(changeFilter(''));
         } else {
           alert(value.name + ' is already in contacts');
